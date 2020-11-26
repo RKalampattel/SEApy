@@ -6,5 +6,5 @@
 
 import transmissionLoss
 
-ss = transmissionLoss.calculate_ss(25, 20)
-print("Sound speed is:\t", round(ss, 1))
+tl_db = transmissionLoss.calculate(output_flag=False)
+print("Transmission loss is: ", round(tl_db, 1), " dB")
