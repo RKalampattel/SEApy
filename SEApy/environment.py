@@ -9,6 +9,8 @@
 import pandas as pd
 import numpy as np
 
+import scenario
+
 # Depth dependent sound speed as an array
 ssp = [
     [0, 1540],  # 1540 m/s at the surface
@@ -40,4 +42,18 @@ bottom_density = 1200
 bottom_soundspeed = 1450
 
 # Surface profile
-surface = np.array([[r, 0.5+0.5*np.sin(2*np.pi*0.005*r)] for r in np.linspace(0, 1000, 1001)])
+surface = np.array([[r, 0.5+0.5*np.sin(2*np.pi*0.005*r)]
+                    for r in np.linspace(0, scenario.rx_range, 1+scenario.rx_range)])
+
+# Ambient noise
+# TODO: Convert to lookup table based on sea_state and scenario.tx_frequency
+an = pd.DataFrame({
+        1: [34],                # profile at SS1
+        2: [39],                # profile at SS2
+        3: [47],                # profile at SS3
+        4: [50],                # profile at SS4
+        5: [52],                # profile at SS5
+        6: [54]},               # profile at SS6
+        index=[20000])          # frequency of profiles in Hz
+
+sea_state = 3

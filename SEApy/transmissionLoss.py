@@ -1,5 +1,7 @@
 # transmissionLoss.py
 #
+# Calculates transmission loss in dB
+#
 # Rahul Kalampattel
 # Created: 24/11/2020
 # Updated: 26/11/2020
@@ -22,7 +24,7 @@ def calculate(output_flag):
         rx_depth=scenario.rx_depth,
         rx_range=scenario.rx_range,
         tx_depth=scenario.tx_depth,
-        tx_directionality=scenario.beampattern
+        tx_directionality=scenario.tx_beampattern
     )
 
     rays = pm.compute_eigenrays(env, model='bellhop')
@@ -31,7 +33,7 @@ def calculate(output_flag):
 
     tl = pm.compute_transmission_loss(env, model='bellhop')
 
-    tl_db = 20*np.log10(np.abs(tl.iloc[0, 0]))
+    tl_db = np.abs(20*np.log10(np.abs(tl.iloc[0, 0])))
 
     if output_flag:
         pm.print_env(env)
@@ -48,7 +50,7 @@ def calculate(output_flag):
               [['time_of_arrival', 'arrival_amplitude',
                 'surface_bounces', 'bottom_bounces']])
 
-        env['rx_range'] = np.linspace(scenario.rx_range-100, scenario.rx_range+100, 1+10*(scenario.rx_range+100))
+        env['rx_range'] = np.linspace(0, scenario.rx_range+100, 1+10*(scenario.rx_range+100))
         env['rx_depth'] = np.linspace(0, environment.max_depth, 1+10*environment.max_depth)
 
         tl = pm.compute_transmission_loss(env, model='bellhop')

@@ -9,8 +9,11 @@
 import numpy as np
 
 # TX properties
-tx_depth = 15
-beampattern = np.array([
+tx_depth = 15           # m
+tx_frequency = 20000    # Hz
+tx_source_level = 200   # dB
+tx_speed_range = 20     # knots
+tx_beampattern = np.array([
     [-180,  10], [-170, -10], [-160,   0], [-150, -20], [-140, -10], [-130, -30],
     [-120, -20], [-110, -40], [-100, -30], [-90 , -50], [-80 , -30], [-70 , -40],
     [-60 , -20], [-50 , -30], [-40 , -10], [-30 , -20], [-20 ,   0], [-10 , -10],
@@ -21,5 +24,8 @@ beampattern = np.array([
 ])
 
 # RX properties
-rx_range = 800
-rx_depth = 15
+rx_bandwidth = 10           # dB
+rx_depth = 15               # m
+rx_detection_threshold = 5  # dB
+rx_directivity_index = 10   # dB
+rx_range = 2000             # m
