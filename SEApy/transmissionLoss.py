@@ -5,6 +5,8 @@
 # Rahul Kalampattel
 # Created: 24/11/2020
 # Updated: 27/11/2020
+# Jay Patel
+# Updated: 26/05/2021
 
 import arlpy.uwapm as pm
 import numpy as np
@@ -45,6 +47,8 @@ def calculate(output_flag):
 
         pm.plot_ssp(env, width=1000)
 
+        # You need to again calculate rays first, previously you only calculated the eigen rays. 
+        rays = pm.compute_rays(env)
         pm.plot_rays(rays, env=env, width=1000)
 
         pm.plot_arrivals(arrivals, dB=True, width=1000)
